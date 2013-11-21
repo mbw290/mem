@@ -5,7 +5,9 @@ public class memMain
 	
 	public static void main(String[] args) 
 	{
-	System.out.println("matt");	
+	System.out.println("|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|"+"         "+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|\n"+"|");
+	System.out.println("---------");
+	
 
 	}
 
