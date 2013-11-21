@@ -3,7 +3,6 @@ package memory;
 public class memMain 
 {
 	
-
 	public static void main(String[] args) 
 	{
 		//getInfo();
@@ -39,6 +38,10 @@ public class memMain
 			}
 		}
 		
+		JOptionPane.showInputDialog(null,"Enter amount of processes: ");
+		return processes;
+	}
+		
 		public static void printResults()
 		{
 			int i=0;
@@ -49,10 +52,5 @@ public class memMain
 			}
 			System.out.println(" "+"__________");
 		}
-		
-		
-		JOptionPane.showInputDialog(null,"Enter amount of processes: ");
-		return processes;
-	}
 
 }
