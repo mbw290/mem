@@ -11,12 +11,12 @@ public class memMain
 		int memSize=0;
 		try
 		{
-			memSize=Integer.parseInt(SMemSize);
+			memSize=Integer.parseInt(sMemSize);
 		}
 		
-		catch
+		catch(NumberFormatException e)
 		{
-			JOptionPane.showDialogMessage(null,"Please enter valid size");
+			JOptionPane.showMessageDialog(null,"Please enter valid size");
 		}
 	}
 	
