@@ -5,7 +5,7 @@ public class memMain
 	
 	public static void main(String[] args) 
 	{
-		//cscholl
+		getInfo();
 	}
 	
 	public static int[] getInfo()
