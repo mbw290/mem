@@ -1,12 +1,23 @@
 package memory;
 
+import javax.swing.JOptionPane;
+
 public class memMain 
 {
 	
 	public static void main(String[] args) 
 	{
-		//getInfo();
+		String sMemSize=JOptionPane.showInputDialog(null,"Enter size of memory array");
+		int memSize=0;
+		try
+		{
+			memSize=Integer.parseInt(SMemSize);
+		}
 		
+		catch
+		{
+			JOptionPane.showDialogMessage(null,"Please enter valid size");
+		}
 	}
 	
 	public static int[] getInfo()
