@@ -3,9 +3,17 @@ package memory;
 public class memMain 
 {
 	
+
 	public static void main(String[] args) 
 	{
-		getInfo();
+		//getInfo();
+		int i=0;
+		while (i<10)
+		{
+		System.out.println("|"+"          "+"|");
+		i++;
+		}
+		System.out.println(" "+"__________");
 	}
 	
 	public static int[] getInfo()
