@@ -7,13 +7,7 @@ public class memMain
 	public static void main(String[] args) 
 	{
 		//getInfo();
-		int i=0;
-		while (i<10)
-		{
-		System.out.println("|"+"          "+"|");
-		i++;
-		}
-		System.out.println(" "+"__________");
+		
 	}
 	
 	public static int[] getInfo()
@@ -43,6 +37,17 @@ public class memMain
 				JOptionPane.showMessageDialog(null,"Please enter an integer");
 
 			}
+		}
+		
+		public static void printResults()
+		{
+			int i=0;
+			while (i<10)
+			{
+			System.out.println("|"+"          "+"|");
+			i++;
+			}
+			System.out.println(" "+"__________");
 		}
 		
 		
