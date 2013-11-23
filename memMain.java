@@ -7,6 +7,7 @@ public class memMain
 	
 	public static void main(String[] args) 
 	{
+	
 		String sMemSize=JOptionPane.showInputDialog(null,"Enter size of memory array");
 		int memSize=0;
 		try
@@ -18,6 +19,9 @@ public class memMain
 		{
 			JOptionPane.showMessageDialog(null,"Please enter valid size");
 		}
+		
+		int[]processes=getInfo();
+		printResults(processes);
 	}
 	
 	public static int[] getInfo()
@@ -48,20 +52,31 @@ public class memMain
 
 			}
 		}
-		
-		JOptionPane.showInputDialog(null,"Enter amount of processes: ");
+	
 		return processes;
 	}
 		
-		public static void printResults()
+		public static void printResults(int[]processes)
 		{
-			int i=0;
-			while (i<10)
+			int[] divideProcess=new int[processes.length];
+			int k=0;
+			for (int i=0; i<processes.length;i++)
 			{
-			System.out.println("|"+"          "+"|");
-			i++;
+				divideProcess[i]=processes[i]/100;
 			}
-			System.out.println(" "+"__________");
+			for (int j=0; j<processes.length; j++)
+			{
+				k=0;
+				while (k<divideProcess[j])
+				{
+					System.out.println("|");
+					k++;
+				}
+			System.out.println("--"+processes[j]);
+			}
+			
+			System.out.println("----------");
 		}
+			
 
 }
