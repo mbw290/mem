@@ -4,10 +4,33 @@ import javax.swing.JOptionPane;
 
 public class memMain 
 {
-	
 	public static void main(String[] args) 
 	{
 	
+		{
+            int choice;
+            int queue;
+      
+            do
+            {                
+                    choice=showMenu();        
+                    switch (choice)
+                    {
+                    //Each case asks for number of processes and feeds the array and number into methods
+                    case 1:       
+                    int [] FF=getFF();
+                    printResults(FF);
+                    break;
+                    case 2:                       
+                    break;
+                    case 3:
+                    System.exit(0);
+                    break;
+                    }
+            }while (choice!=3);
+    }
+		
+
 		String sMemSize=JOptionPane.showInputDialog(null,"Enter size of memory array");
 		int memSize=0;
 		try
@@ -20,14 +43,13 @@ public class memMain
 			JOptionPane.showMessageDialog(null,"Please enter valid size");
 		}
 		
-		int[]processes=getInfo();
-		printResults(processes);
+		int[]processes=getFF();
+		
 	}
 	
-	public static int[] getInfo()
+	public static int[] getFF()
 	{
 		int size=0;
-	
 		String Ssize=JOptionPane.showInputDialog(null,"Enter amount of processes: ");
 		try
 		{
@@ -78,6 +100,31 @@ public class memMain
 			
 			System.out.println("----------");
 		}
+		
+		public static int showMenu()
+        {
+                int mchoice=0;
+            try
+            {
+                    String s = JOptionPane.showInputDialog(
+                                "Select an algorithm: \n" +
+                                            "  1) First Fit\n" +
+                                            "  2) Worst Fit\n" +
+                                                "  3) EXIT\n");
+                    mchoice = Integer.parseInt(s);
+                    if(mchoice>3)
+                    {
+                            JOptionPane.showMessageDialog(null,"Please enter a valid choice");
+                    }           
+                }
+            
+         
+                catch (NumberFormatException e)
+            {
+                    JOptionPane.showMessageDialog(null,"Please enter a valid choice");
+            }
+            return mchoice;
+        }
 			
 
 }
