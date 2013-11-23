@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class memMain 
 {
+
 	public static void main(String[] args) 
 	{
 	
@@ -31,17 +32,7 @@ public class memMain
     }
 		
 
-		String sMemSize=JOptionPane.showInputDialog(null,"Enter size of memory array");
-		int memSize=0;
-		try
-		{
-			memSize=Integer.parseInt(sMemSize);
-		}
-		
-		catch(NumberFormatException e)
-		{
-			JOptionPane.showMessageDialog(null,"Please enter valid size");
-		}
+	
 		
 		int[]processes=getFF();
 		
@@ -81,16 +72,19 @@ public class memMain
 		public static void printResults(int[]processes)
 		{
 			int[] divideProcess=new int[processes.length];
+			int sum=0;
 			int k=0;
+			int memSize=memSize();
 			for (int i=0; i<processes.length;i++)
 			{
 				divideProcess[i]=processes[i]/100;
+				sum=divideProcess[i]+sum;
 			}
 			for (int j=0; j<processes.length; j++)
 			{
 				k=0;
 				System.out.println("--"+processes[j]);
-				while (k<divideProcess[j])
+				while (k<divideProcess[j]&&sum<memSize)
 				{
 					System.out.println("|"+"         "+"|");
 					k++;
@@ -125,6 +119,23 @@ public class memMain
             }
             return mchoice;
         }
+		
+		public static int memSize()
+		{
+			String sMemSize=JOptionPane.showInputDialog(null,"Enter size of memory array");
+			int memSize=0;
+			try
+			{
+				memSize=Integer.parseInt(sMemSize);
+			}
+			
+			catch(NumberFormatException e)
+			{
+				JOptionPane.showMessageDialog(null,"Please enter valid size");
+			}
+			
+			return memSize;
+		}
 			
 
 }
