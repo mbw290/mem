@@ -67,12 +67,13 @@ public class memMain
 			for (int j=0; j<processes.length; j++)
 			{
 				k=0;
+				System.out.println("--"+processes[j]);
 				while (k<divideProcess[j])
 				{
-					System.out.println("|");
+					System.out.println("|"+"         "+"|");
 					k++;
 				}
-			System.out.println("--"+processes[j]);
+			
 			}
 			
 			System.out.println("----------");
