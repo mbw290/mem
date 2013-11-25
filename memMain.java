@@ -75,10 +75,22 @@ public class memMain
 			int sum=0;
 			int k=0;
 			int memSize=memSize();
+			int position[]=new int[processes.length];
 			for (int i=0; i<processes.length;i++)
 			{
 				divideProcess[i]=processes[i]/100;
-				sum=divideProcess[i]+sum;
+				sum=processes[i]+sum;
+				{
+					if (sum>memSize)
+					{
+						sum=sum-processes[i];
+					}
+					else
+					{
+					position[i]=i;
+					System.out.println(position[i]);
+					}
+				}
 			}
 			for (int j=0; j<processes.length; j++)
 			{
