@@ -4,13 +4,11 @@ import javax.swing.JOptionPane;
 
 public class memMain 
 {
-
 	public static void main(String[] args) 
 	{
 	
 		{
             int choice;
-            int queue;
       
             do
             {                
@@ -30,12 +28,7 @@ public class memMain
                     }
             }while (choice!=3);
     }
-		
-
-	
-		
-		int[]processes=getFF();
-		
+			
 	}
 	
 	public static int[] getFF()
@@ -73,6 +66,7 @@ public class memMain
 		{
 			int[] divideProcess=new int[processes.length];
 			int sum=0;
+			int j=0;
 			int k=0;
 			int memSize=memSize();
 			int position[]=new int[processes.length];
@@ -92,7 +86,6 @@ public class memMain
 					}
 				}
 			}
-		int j=0;
 			while(j<position.length)
 			{
 				k=0;
