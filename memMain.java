@@ -87,23 +87,24 @@ public class memMain
 					}
 					else
 					{
-					position[i]=i;
+					position[i]=i;	
 					System.out.println(position[i]);
 					}
 				}
 			}
-			for (int j=0; j<processes.length; j++)
+		int j=0;
+			while(j<position.length)
 			{
 				k=0;
-				System.out.println("--"+processes[j]);
+				System.out.println(position[j]);
+				System.out.println("--"+processes[position[j]]);		
 				while (k<divideProcess[j]&&sum<memSize)
 				{
-					System.out.println("|"+"         "+"|");
-					k++;
+				System.out.println("|"+"         "+"|");
+				k++;
 				}
-			
+				j++;
 			}
-			
 			System.out.println("----------");
 		}
 		
@@ -148,6 +149,5 @@ public class memMain
 			
 			return memSize;
 		}
-			
 
 }
