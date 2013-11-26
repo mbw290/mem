@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class memMain 
 {
+
 	public static void main(String[] args) 
 	{
 	
@@ -66,7 +67,6 @@ public class memMain
 		{
 			int[] divideProcess=new int[processes.length];
 			int sum=0;
-			int j=0;
 			int k=0;
 			int memSize=memSize();
 			int position[]=new int[processes.length];
@@ -82,21 +82,18 @@ public class memMain
 					else
 					{
 					position[i]=i;	
-					System.out.println(position[i]);
 					}
 				}
 			}
-			while(j<position.length)
+			for(int j=0;j<position.length;j++)
 			{
 				k=0;
-				System.out.println(position[j]);
 				System.out.println("--"+processes[position[j]]);		
-				while (k<divideProcess[j]&&sum<memSize)
+				while (k<divideProcess[position[j]])
 				{
 				System.out.println("|"+"         "+"|");
 				k++;
 				}
-				j++;
 			}
 			System.out.println("----------");
 		}
@@ -142,5 +139,5 @@ public class memMain
 			
 			return memSize;
 		}
-
+					
 }
