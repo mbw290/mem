@@ -19,8 +19,8 @@ public class memMain
                     {
                     //Each case asks for number of processes and feeds the array and number into methods
                     case 1:       
-                    int [] FF=getFF();
-                    int[] sorted=sortBurst(FF);
+                    int [] BF=getBF();
+                    int[] sorted=sortMem(BF);
                     printResults(sorted);
                     break;
                     case 2:                       
@@ -34,7 +34,7 @@ public class memMain
 			
 	}
 	
-	public static int[] getFF()
+	public static int[] getBF()
 	{
 		int size=0;
 		String Ssize=JOptionPane.showInputDialog(null,"Enter amount of processes: ");
@@ -110,7 +110,7 @@ public class memMain
             {
                     String s = JOptionPane.showInputDialog(
                                 "Select an algorithm: \n" +
-                                            "  1) First Fit\n" +
+                                            "  1) Best Fit\n" +
                                             "  2) Worst Fit\n" +
                                                 "  3) EXIT\n");
                     mchoice = Integer.parseInt(s);
@@ -145,26 +145,26 @@ public class memMain
 			return memSize;
 		}
 		
-		public static int[] sortBurst(int[] exec)
+		public static int[] sortMem(int[] BF)
         {
-        int[]sortExec=new int[exec.length];
+        int[]sortExec=new int[BF.length];
         //This portion loops through the array and stores the values in a temp after comparison
-        	for(int i=0; i<exec.length; i++)
+        	for(int i=0; i<BF.length; i++)
         	{
-                for(int j=i+1; j<exec.length; j++)
+                for(int j=i+1; j<BF.length; j++)
                 {
-                        if(exec[i] < exec[j] )
+                        if(BF[i] < BF[j] )
                         {
-                        	int temp = exec[j];
-                        	exec[j] = exec[i];
-                        	exec[i] = temp;
+                        	int temp = BF[j];
+                        	BF[j] = BF[i];
+                        	BF[i] = temp;
                         }
                 }
         	}
        
-        	for(int k=0; k<exec.length; k++)
+        	for(int k=0; k<BF.length; k++)
         	{
-        		sortExec[k]=exec[k];
+        		sortExec[k]=BF[k];
         	}
         	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
                return sortExec;
