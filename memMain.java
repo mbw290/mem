@@ -19,7 +19,8 @@ public class memMain
                     //Each case asks for number of processes and feeds the array and number into methods
                     case 1:       
                     int [] FF=getFF();
-                    printResults(FF);
+                    int[] sorted=sortBurst(FF);
+                    printResults(sorted);
                     break;
                     case 2:                       
                     break;
@@ -67,33 +68,30 @@ public class memMain
 		{
 			int[] divideProcess=new int[processes.length];
 			int sum=0;
-			int k=0;
+			int j=0;
+			int remainder=0;
 			int memSize=memSize();
-			int position[]=new int[processes.length];
-			for (int i=0; i<processes.length;i++)
+			for (int i=0;i<processes.length;i++)
 			{
 				divideProcess[i]=processes[i]/100;
-				sum=processes[i]+sum;
-				{
-					if (sum>memSize)
-					{
-						sum=sum-processes[i];
-					}
-					else
-					{
-					position[i]=i;	
-					}
-				}
 			}
-			for(int j=0;j<position.length;j++)
-			{
-				k=0;
-				System.out.println("--"+processes[position[j]]);		
-				while (k<divideProcess[position[j]])
+				while(sum<=memSize&&j<processes.length)
 				{
-				System.out.println("|"+"         "+"|");
-				k++;
+					System.out.println("--"+"   "+ processes[j]);
+					int k=0;
+					while(k<divideProcess[j])
+					{
+					System.out.println("|"+"         "+"|");
+					k++;
+					}
+					sum=sum+processes[j];
+					System.out.println(sum);
+					j++;
 				}
+				
+			if(sum<memSize)
+			{
+				
 			}
 			System.out.println("----------");
 		}
@@ -139,5 +137,31 @@ public class memMain
 			
 			return memSize;
 		}
+		
+		public static int[] sortBurst(int[] exec)
+        {
+        int[]sortExec=new int[exec.length];
+        //This portion loops through the array and stores the values in a temp after comparison
+        	for(int i=0; i<exec.length; i++)
+        	{
+                for(int j=i+1; j<exec.length; j++)
+                {
+                        if(exec[i] < exec[j] )
+                        {
+                        	int temp = exec[j];
+                        	exec[j] = exec[i];
+                        	exec[i] = temp;
+                        }
+                }
+        	}
+       
+        	for(int k=0; k<exec.length; k++)
+        	{
+        		sortExec[k]=exec[k];
+        	}
+        	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
+               return sortExec;
+       }
+
 					
 }
