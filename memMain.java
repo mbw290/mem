@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class memMain 
 {
 
+
 	public static void main(String[] args) 
 	{
 	
@@ -70,6 +71,7 @@ public class memMain
 			int sum=0;
 			int j=0;
 			int remainder=0;
+			int m=0;
 			int memSize=memSize();
 			for (int i=0;i<processes.length;i++)
 			{
@@ -91,7 +93,12 @@ public class memMain
 				
 			if(sum<memSize)
 			{
-				
+				remainder=(memSize-sum)/100;
+			}
+			while (m<remainder)
+			{
+				System.out.println("|"+"         "+"|");
+				m++;
 			}
 			System.out.println("----------");
 		}
@@ -162,6 +169,5 @@ public class memMain
         	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
                return sortExec;
        }
-
 					
 }
