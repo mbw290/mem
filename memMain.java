@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 public class memMain 
 {
 
-
 	public static void main(String[] args) 
 	{
 	
@@ -18,10 +17,11 @@ public class memMain
                     switch (choice)
                     {
                     //Each case asks for number of processes and feeds the array and number into methods
-                    case 1:       
+                    case 1:
+                    int memSize=memSize();
                     int [] BF=getBF();
                     int[] sorted=sortMem(BF);
-                    printResults(sorted);
+                    printResults(sorted,memSize);
                     break;
                     case 2:                       
                     break;
@@ -37,6 +37,20 @@ public class memMain
 	public static int[] getBF()
 	{
 		int size=0;
+		int Ichoice=0;
+		try
+		{
+		String bsChoice=JOptionPane.showInputDialog(
+                                "Select a memory size: \n" +
+                                            "  1) Kilobytes\n" +
+                                            "  2) Megabytes\n" +
+                                                "  3) Gigabytes\n");
+        Ichoice = Integer.parseInt(bsChoice);
+		}
+		catch(NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null,"Enter a valid choice");
+		}
 		String Ssize=JOptionPane.showInputDialog(null,"Enter amount of processes: ");
 		try
 		{
@@ -61,18 +75,35 @@ public class memMain
 
 			}
 		}
+		
+		if (Ichoice==2)
+		{
+			for (int i=0; i<processes.length;i++)
+			{
+				processes[i]=processes[i]*1024;
+			}
+		}
+		
+		if (Ichoice==3)
+		{
+			for (int i=0; i<processes.length;i++)
+			{
+				processes[i]=processes[i]*1024*1024;
+			}
+		}
+		
+		
 	
 		return processes;
 	}
 		
-		public static void printResults(int[]processes)
+		public static void printResults(int[]processes,int memSize)
 		{
 			int[] divideProcess=new int[processes.length];
 			int sum=0;
 			int j=0;
 			int remainder=0;
 			int m=0;
-			int memSize=memSize();
 			for (int i=0;i<processes.length;i++)
 			{
 				divideProcess[i]=processes[i]/100;
