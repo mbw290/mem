@@ -20,14 +20,15 @@ public class memMain
                     case 1:
                     int memSize=memSize();
                     int [] BF=getPROC();
-                    int[] sorted=sortMem(BF);
+                    int[] sorted=sortMemBF(BF);
                     String Cchoice=printResults(sorted,memSize);
                     compact(Cchoice,BF);
                     break;
                     case 2:       
                     memSize=memSize();
                     int WF[]=getPROC();
-                    Cchoice=printResults(WF,memSize);
+                    int[] sortedWF=sortMemWF(WF);
+                    Cchoice=printResults(sortedWF,memSize);
                     compact(Cchoice,WF);
                     break;
                     case 3:
@@ -194,7 +195,7 @@ public class memMain
 			return memSize;
 		}
 		
-		public static int[] sortMem(int[] BF)
+		public static int[] sortMemBF(int[] BF)
         {
         int[]sortExec=new int[BF.length];
         //This portion loops through the array and stores the values in a temp after comparison
@@ -219,6 +220,30 @@ public class memMain
                return sortExec;
        }
 		
+		public static int[] sortMemWF(int[] WF)
+        {
+        int[]sortExec=new int[WF.length];
+        //This portion loops through the array and stores the values in a temp after comparison
+        	for(int i=0; i<WF.length; i++)
+        	{
+                for(int j=i+1; j<WF.length; j++)
+                {
+                        if(WF[i] > WF[j] )
+                        {
+                        	int temp = WF[j];
+                        	WF[j] = WF[i];
+                        	WF[i] = temp;
+                        }
+                }
+        	}
+       
+        	for(int k=0; k<WF.length; k++)
+        	{
+        		sortExec[k]=WF[k];
+        	}
+        	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
+               return sortExec;
+       }
 		public static void compact(String choice,int[]processes)
 		{
 		int j=0;
