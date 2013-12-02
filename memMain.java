@@ -142,12 +142,14 @@ public class memMain
 				m++;
 			}
 			System.out.println("----------");
-			String choice=JOptionPane.showInputDialog(null,"Would you like to remove any?(y/n");
+			String choice=JOptionPane.showInputDialog(null,"Would you like to remove any?(y/n)");
 			if (choice=="y"||choice=="Y")
 			{
 				return choice;
 			}
+			JOptionPane.showMessageDialog(null,"Choice is"+" "+choice);
 			return choice;
+		
 		}
 		
 		public static int showMenu()
@@ -221,8 +223,9 @@ public class memMain
 		{
 		int j=0;
 		int m=0;
-			if (choice=="N"||choice=="n")
+			if (choice.equals("N")||choice.equals("n"))
 			{
+				JOptionPane.showMessageDialog(null, "BYE");
 				System.exit(0);
 			}
 			System.out.println("STARTING COMPACTION!");
