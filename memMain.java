@@ -19,11 +19,16 @@ public class memMain
                     //Each case asks for number of processes and feeds the array and number into methods
                     case 1:
                     int memSize=memSize();
-                    int [] BF=getBF();
+                    int [] BF=getPROC();
                     int[] sorted=sortMem(BF);
-                    printResults(sorted,memSize);
+                    String Cchoice=printResults(sorted,memSize);
+                    compact(Cchoice,BF);
                     break;
-                    case 2:                       
+                    case 2:       
+                    memSize=memSize();
+                    int WF[]=getPROC();
+                    Cchoice=printResults(WF,memSize);
+                    compact(Cchoice,WF);
                     break;
                     case 3:
                     System.exit(0);
@@ -34,7 +39,7 @@ public class memMain
 			
 	}
 	
-	public static int[] getBF()
+	public static int[] getPROC()
 	{
 		int size=0;
 		int Ichoice=0;
@@ -76,11 +81,11 @@ public class memMain
 			}
 		}
 		
-		if (Ichoice==2)
+		if (Ichoice==1)
 		{
 			for (int i=0; i<processes.length;i++)
 			{
-				processes[i]=processes[i]*1024;
+				processes[i]=processes[i]/1024;
 			}
 		}
 		
@@ -97,7 +102,7 @@ public class memMain
 		return processes;
 	}
 		
-		public static void printResults(int[]processes,int memSize)
+		public static String printResults(int[]processes,int memSize)
 		{
 			int[] divideProcess=new int[processes.length];
 			int sum=0;
@@ -110,6 +115,11 @@ public class memMain
 			}
 				while(sum<=memSize&&j<processes.length)
 				{
+					if (processes[j]>memSize)
+					{
+						
+						j++;
+					}
 					System.out.println("--"+"   "+ processes[j]);
 					int k=0;
 					while(k<divideProcess[j])
@@ -118,7 +128,7 @@ public class memMain
 					k++;
 					}
 					sum=sum+processes[j];
-					System.out.println(sum);
+					System.out.println("--END"+" "+"process"+j);
 					j++;
 				}
 				
@@ -132,6 +142,12 @@ public class memMain
 				m++;
 			}
 			System.out.println("----------");
+			String choice=JOptionPane.showInputDialog(null,"Would you like to remove any?(y/n");
+			if (choice=="y"||choice=="Y")
+			{
+				return choice;
+			}
+			return choice;
 		}
 		
 		public static int showMenu()
@@ -200,5 +216,93 @@ public class memMain
         	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
                return sortExec;
        }
-					
+		
+		public static void compact(String choice,int[]processes)
+		{
+		int j=0;
+		int m=0;
+			if (choice=="N"||choice=="n")
+			{
+				System.exit(0);
+			}
+			System.out.println("STARTING COMPACTION!");
+			int amount=0;
+			String Samount=JOptionPane.showInputDialog(null,"How many processes would you like to remove?");
+			try
+			{
+				amount=Integer.parseInt(Samount);
+				
+			}
+			
+			catch (NumberFormatException e)
+			{
+				JOptionPane.showMessageDialog(null, "Enter valid amount");
+			}
+			int [] removal=new int[amount];
+			int []divideProcess=new int[processes.length];
+			int sum=0;
+			int memSize=memSize();
+			int remainder=0;
+			String Sproc=JOptionPane.showInputDialog("Which process(es) would you like to remove?(separate by comma)");
+			StringTokenizer st = new StringTokenizer(Sproc,",");
+			while (st.hasMoreElements()) 
+			{
+				try
+				{
+				removal[j]=Integer.parseInt((String) st.nextElement());
+				}
+				catch (NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog(null, "Enter valid number");
+				}
+				j++;
+			}
+				
+			for (int k=0;k<processes.length;k++)
+			{
+				divideProcess[k]=processes[k]/100;
+			}
+			for (int y=0;y<removal.length;y++)
+			{
+			JOptionPane.showMessageDialog(null, "REMOVE"+" "+y);
+			}
+			for (int i=0;i<divideProcess.length;i++)
+			{
+				for (int k=0;k<removal.length;k++)
+				{
+					if (i!=removal[k])
+					{
+						while(sum<=memSize&&j<processes.length)
+						{
+							if (processes[j]>memSize)
+							{
+								j++;
+							}
+						System.out.println("--"+"   "+ processes[j]);
+						int z=0;
+						while(z<divideProcess[j])
+						{
+						System.out.println("|"+"         "+"|");
+						z++;
+						}
+						sum=sum+processes[j];
+						System.out.println("--END"+" "+"process"+j);
+						j++;
+						}
+					}
+				}
+						
+					if(sum<memSize)
+					{
+						remainder=(memSize-sum)/100;
+					}
+					while (m<remainder)
+					{
+						System.out.println("|"+"         "+"|");
+						m++;
+					}
+					System.out.println("----------");	
+					}
+						
+				}
 }
