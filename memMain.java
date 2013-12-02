@@ -19,14 +19,34 @@ public class memMain
                     //Each case asks for number of processes and feeds the array and number into methods
                     case 1:
                     int memSize=memSize();
-                    int [] BF=getPROC();
+                    String rChoice=JOptionPane.showInputDialog(null,"Would you like it random?");
+                    int[] BF;
+                    if (rChoice.equals("Y"))
+                    {
+                    BF=genRandom(memSize);
+                    int[] sorted=sortMemBF(BF);
+                    String Cchoice=printResults(sorted,memSize);
+                    compact(Cchoice,BF);
+                    System.exit(0);
+                    }
+                    BF=getPROC();
                     int[] sorted=sortMemBF(BF);
                     String Cchoice=printResults(sorted,memSize);
                     compact(Cchoice,BF);
                     break;
                     case 2:       
                     memSize=memSize();
-                    int WF[]=getPROC();
+                    String r2Choice=JOptionPane.showInputDialog(null,"Would you like it random?");
+                    int[] WF;
+                    if (r2Choice.equals("Y"))
+                    {
+                    WF=genRandom(memSize);
+                    int[] WFsorted=sortMemBF(WF);
+                    String WFchoice=printResults(WFsorted,memSize);
+                    compact(WFchoice,WF);
+                    System.exit(0);
+                    }
+                    WF=getPROC();
                     int[] sortedWF=sortMemWF(WF);
                     Cchoice=printResults(sortedWF,memSize);
                     compact(Cchoice,WF);
@@ -40,6 +60,18 @@ public class memMain
 			
 	}
 	
+	public static int[] genRandom(int memSize)
+	{
+		int[] processes=new int [memSize];
+		Random generator = new Random();
+		int random_integer = generator.nextInt(1024-128) + 128;
+		for (int i=0;i<processes.length;i++)
+		{
+			processes[i]=random_integer;
+		}
+		
+		return processes;
+	}
 	public static int[] getPROC()
 	{
 		int size=0;
@@ -333,4 +365,5 @@ public class memMain
 					}
 						
 				}
+
 }
