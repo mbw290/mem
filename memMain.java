@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class memMain 
 {
 
+
 	public static void main(String[] args) 
 	{
 	
@@ -128,10 +129,7 @@ public class memMain
 			{
 				processes[i]=processes[i]*1024*1024;
 			}
-		}
-		
-		
-	
+		}	
 		return processes;
 	}
 		
@@ -142,27 +140,26 @@ public class memMain
 			int j=0;
 			int remainder=0;
 			int m=0;
-			for (int i=0;i<processes.length;i++)
-			{
+				for (int i=0;i<processes.length;i++)
+				{
 				divideProcess[i]=processes[i]/100;
-			}
+				}
 				while(sum<=memSize&&j<processes.length)
 				{
 					if (processes[j]>memSize)
-					{
-						
-						j++;
+					{		
+					j++;
 					}
 					System.out.println("--"+"   "+ processes[j]);
 					int k=0;
-					while(k<divideProcess[j])
-					{
-					System.out.println("|"+"         "+"|");
-					k++;
-					}
-					sum=sum+processes[j];
-					System.out.println("--END"+" "+"process"+j);
-					j++;
+						while(k<divideProcess[j])
+						{
+						System.out.println("|"+"         "+"|");
+						k++;
+						}
+						sum=sum+processes[j];
+						System.out.println("--END"+" "+"process"+j);
+						j++;
 				}
 				
 			if(sum<memSize)
@@ -180,9 +177,7 @@ public class memMain
 			{
 				return choice;
 			}
-			JOptionPane.showMessageDialog(null,"Choice is"+" "+choice);
 			return choice;
-		
 		}
 		
 		public static int showMenu()
