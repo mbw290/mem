@@ -4,20 +4,18 @@ import javax.swing.JOptionPane;
 
 public class memMain 
 {
-
-
 	public static void main(String[] args) 
 	{
-	
 		{
             int choice;
-      
             do
             {                
                     choice=showMenu();        
                     switch (choice)
                     {
                     //Each case asks for number of processes and feeds the array and number into methods
+                    //If the user chooses to have a random array, genRandom is run
+                    //If the user wants manual entry, the user is prompted and the array is sorted 
                     case 1:
                     int memSize=memSize();
                     String rChoice=JOptionPane.showInputDialog(null,"Would you like it random?");
@@ -29,7 +27,7 @@ public class memMain
                     String Cchoice=printResults(sorted,memSize);
                     compact(Cchoice,BF);
                     System.exit(0);
-                    }
+                    }                   
                     BF=getPROC();
                     int[] sorted=sortMemBF(BF);
                     String Cchoice=printResults(sorted,memSize);
@@ -60,7 +58,7 @@ public class memMain
     }
 			
 	}
-	
+	//Generate a series of random numbers from 128-1024 to fill the memory array
 	public static int[] genRandom(int memSize)
 	{
 		int[] processes=new int [memSize];
@@ -73,10 +71,12 @@ public class memMain
 		
 		return processes;
 	}
+	//Prompt the users to manually enter processes
 	public static int[] getPROC()
 	{
 		int size=0;
 		int Ichoice=0;
+	//Find units for the user to enter processes and check input for integer
 		try
 		{
 		String bsChoice=JOptionPane.showInputDialog(
@@ -90,6 +90,7 @@ public class memMain
 		{
 			JOptionPane.showMessageDialog(null,"Enter a valid choice");
 		}
+		//Ask the user for amount of processes to set loop reps and array size
 		String Ssize=JOptionPane.showInputDialog(null,"Enter amount of processes: ");
 		try
 		{
@@ -100,7 +101,7 @@ public class memMain
 			JOptionPane.showMessageDialog(null,"Please enter an integer");
 		}
 		int[] processes=new int[size];
-		
+		//Loop for size of defined array to get process sizes
 		for(int i=0; i<size; i++)
 		{
 			String process=JOptionPane.showInputDialog(null,"Enter size for process" + " " + i);
@@ -114,7 +115,7 @@ public class memMain
 
 			}
 		}
-		
+		//Perform the appropriate math based on units entered by user
 		if (Ichoice==1)
 		{
 			for (int i=0; i<processes.length;i++)
@@ -132,7 +133,8 @@ public class memMain
 		}	
 		return processes;
 	}
-		
+	
+	//Print results keeps prints processes with lines to fill the array
 		public static String printResults(int[]processes,int memSize)
 		{
 			int[] divideProcess=new int[processes.length];
@@ -140,32 +142,43 @@ public class memMain
 			int j=0;
 			int remainder=0;
 			int m=0;
+			//To print, we want to scale divided by 100 to print a normal amount of lines
+			//with the same ratio (ie 10 lines vs 1024)
 				for (int i=0;i<processes.length;i++)
 				{
 				divideProcess[i]=processes[i]/100;
 				}
+			//Keep going for each process while the process sum does not equal array size
 				while(sum<=memSize&&j<processes.length)
 				{
+					//Make sure the individual process does not exceed array size
+					//If so, skip it
 					if (processes[j]>memSize)
 					{		
 					j++;
 					}
-					System.out.println("--"+"   "+ processes[j]);
-					int k=0;
-						while(k<divideProcess[j])
-						{
-						System.out.println("|"+"         "+"|");
-						k++;
-						}
+				//Print the dashes with the process memory size	
+				System.out.println("--"+"   "+ processes[j]);
+				int k=0;
+				//Print vertical lines in the appropriate ratio for the memory size
+					while(k<divideProcess[j])
+					{
+					System.out.println("|"+"         "+"|");
+					k++;
+					}
+				//Add the last printed process to the sum
+				//Print more dashes and end to show the end of the process
+				//Move to check the next process
 						sum=sum+processes[j];
 						System.out.println("--END"+" "+"process"+j);
 						j++;
 				}
-				
+			//Print empty blocks if any to show full array size
 			if(sum<memSize)
 			{
 				remainder=(memSize-sum)/100;
 			}
+			//Print all lines for remaining blocks
 			while (m<remainder)
 			{
 				System.out.println("|"+"         "+"|");
@@ -173,6 +186,7 @@ public class memMain
 			}
 			System.out.println("----------");
 			String choice=JOptionPane.showInputDialog(null,"Would you like to remove any?(y/n)");
+			//decide whether or not to run compaction
 			if (choice=="y"||choice=="Y")
 			{
 				return choice;
@@ -243,7 +257,7 @@ public class memMain
         	{
         		sortExec[k]=BF[k];
         	}
-        	//Once the comparisons are complete, the method will print PID times to ensure that they have been sorted
+        	//Once the comparisons are complete, the method will print sizes to ensure that they have been sorted
                return sortExec;
        }
 		
@@ -280,8 +294,9 @@ public class memMain
 				JOptionPane.showMessageDialog(null, "BYE");
 				System.exit(0);
 			}
-			System.out.println("STARTING COMPACTION!");
+			System.out.println("STARTING AUTO-COMPACTION!");
 			int amount=0;
+			//Find out how many processes to remove before compaction
 			String Samount=JOptionPane.showInputDialog(null,"How many processes would you like to remove?");
 			try
 			{
@@ -293,12 +308,17 @@ public class memMain
 			{
 				JOptionPane.showMessageDialog(null, "Enter valid amount");
 			}
+			//Create an array to store the processes to remove from the array
 			int [] removal=new int[amount];
 			int []divideProcess=new int[processes.length];
 			int sum=0;
+			//Obtain the new memory size
 			int memSize=memSize();
 			int remainder=0;
+			//Find the amount of processes to remove 
 			String Sproc=JOptionPane.showInputDialog("Which process(es) would you like to remove?(separate by comma)");
+			//Get integer values for each array element to remove
+			//and populate the array with them
 			StringTokenizer st = new StringTokenizer(Sproc,",");
 			while (st.hasMoreElements()) 
 			{
@@ -312,45 +332,57 @@ public class memMain
 				}
 				j++;
 			}
-				
+			//Just like printResults, we populate the array of divided processes
+			//to maintain a printing ratio
 			for (int k=0;k<processes.length;k++)
 			{
 				divideProcess[k]=processes[k]/100;
 			}
+			//Show the user each process that will be removed
 			for (int y=0;y<removal.length;y++)
 			{
 			JOptionPane.showMessageDialog(null, "REMOVE"+" "+y);
 			}
+			//Here we check each process to see if the user wants it erased
 			for (int i=0;i<divideProcess.length;i++)
 			{
+			//For each process, see if it's in the array of processes that the user
+			//wants removed
 				for (int k=0;k<removal.length;k++)
 				{
 					if (i!=removal[k])
 					{
+					//Check to make sure the sum isn't greater than the array of memory
 						while(sum<=memSize&&j<processes.length)
 						{
+						//Skip the process if it's greater than the memory array by itself
 							if (processes[j]>memSize)
 							{
 								j++;
 							}
+						//Print dashes and the memory amount
 						System.out.println("--"+"   "+ processes[j]);
 						int z=0;
+					//Print vertical lines in the appropriate ratio
 						while(z<divideProcess[j])
 						{
 						System.out.println("|"+"         "+"|");
 						z++;
 						}
+					//Add the size to the sum then the dashes plus end
+					//Move to the next element
 						sum=sum+processes[j];
 						System.out.println("--END"+" "+"process"+j);
 						j++;
 						}
 					}
 				}
-						
+				//Check for empty remaining blocks						
 					if(sum<memSize)
 					{
 						remainder=(memSize-sum)/100;
 					}
+				//Print any empty blocks
 					while (m<remainder)
 					{
 						System.out.println("|"+"         "+"|");
